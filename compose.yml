@@ -19,7 +19,7 @@ services:
       - var_data:/code/var
     networks:
       - symfony_network
-  mysql:
+  database:
     image: mysql:8.2
     container_name: mysql-${PROJECT_NAME}
     environment:
@@ -38,7 +38,7 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: pma-${PROJECT_NAME}
     environment:
-      PMA_HOST: mysql
+      PMA_HOST: database
       MYSQL_ROOT_PASSWORD: password
     ports:
       - "${HOST_PMA_PORT}:80"
