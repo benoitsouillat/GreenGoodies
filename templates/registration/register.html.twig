@@ -3,17 +3,25 @@
 {% block title %}Inscription - GreenGoodies{% endblock %}
 
 {% block body %}
-    <h1>Inscription</h1>
+    <div class="security-body">
+        <div class="illustration-container subcribe">
+            &nbsp;
+        </div>
+        <div class="form-container">
 
-    {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.CGU) }}
+            {{ form_start(registrationForm) }}
+                <h1>Inscription</h1>
+                {{ form_row(registrationForm.lastname) }}
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.CGU) }}
 
-        <button type="submit" class="btn btn-submit">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+                <button type="submit" class="btn btn-fullwidth">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+            <div class="security-link"><a href="{{ path('app_login') }}">Déjà un compte ? Se connecter</a> </div>
+        </div>
+    </div>
 {% endblock %}

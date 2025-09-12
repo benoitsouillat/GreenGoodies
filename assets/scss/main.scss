@@ -1,0 +1,29 @@
+@import 'includes/variables';
+@import 'includes/header';
+@import 'includes/footer';
+
+@import 'pages/security';
+
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: $bgColor;
+    margin: 0;
+}
+
+.btn {
+    cursor: pointer;
+    background-color: $darkgrey;
+    color: #FFFF;
+    border: none;
+    padding: 30px;
+    text-align: center;
+}
+
+.btn-fullwidth {
+    width: 100%;
+}
+
+footer {
+    background-color: white;
+}

@@ -1,3 +1,5 @@
 {% extends 'base.html.twig' %}
 
-<p>Bonjour {{ user.firstname }} {{ user.lastname }}</p>
+{% block body %}
+    <p>Bonjour {{ app.user.firstname }} {{ app.user.lastname }}</p>
+{% endblock %}

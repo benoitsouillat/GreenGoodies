@@ -22,14 +22,17 @@ class RegistrationFormType extends AbstractType
             ->add('firstname', TextType::class, [
                 'required' => true,
                 'label' => 'Prénom',
+                'row_attr' => ['class' => 'form-group'],
             ])
             ->add('lastname', TextType::class, [
                 'required' => true,
                 'label' => 'Nom',
+                'row_attr' => ['class' => 'form-group'],
             ])
             ->add('email', TextType::class, [
                 'required' => true,
                 'label' => 'Adresse email',
+                'row_attr' => ['class' => 'form-group'],
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
@@ -41,6 +44,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'first_options'  => [
                     'label' => 'Mot de passe',
+                    'row_attr' => ['class' => 'form-group'],
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Veuillez entrer un mot de passe',
@@ -55,6 +59,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'second_options' => [
                     'label' => 'Confirmer le mot de passe',
+                    'row_attr' => ['class' => 'form-group'],
                     'constraints' => [
                         new NotBlank([
                             'message' => 'Veuillez confirmer votre mot de passe',

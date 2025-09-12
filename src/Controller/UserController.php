@@ -16,11 +16,17 @@ final class UserController extends AbstractController
         public readonly EntityManagerInterface $manager
     ) {
     }
-
     #[IsGranted('ROLE_USER')]
     #[Route('/profile', name: 'profile')]
     public function profile(): Response
     {
         return $this->render('user/profile.html.twig');
+    }
+
+    #[IsGranted('ROLE_USER')]
+    #[Route('/basket', name: 'basket')]
+    public function basket(): Response
+    {
+        return $this->render('user/basket .html.twig');
     }
 }

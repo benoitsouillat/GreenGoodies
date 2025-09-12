@@ -1,0 +1,101 @@
+header {
+  background-color: #FFFDF7;
+  padding: 30px 10%;
+  display: flex;
+  justify-content: space-between;
+}
+header nav ul {
+  display: flex;
+  gap: 20px;
+  list-style-type: none;
+}
+header nav ul li {
+  padding: 0;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+footer {
+  background-color: white;
+  padding: 30px 10%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.security-body {
+  display: flex;
+  min-height: 800px;
+  height: auto;
+}
+.security-body > div {
+  width: 50%;
+}
+.security-body .illustration-container {
+  background-image: url("../images/connexion.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.security-body .illustration-container.subcribe {
+  background-image: url("../images/subscribe.jpg");
+}
+.security-body .form-container {
+  padding-bottom: 10%;
+}
+.security-body .form-container h1 {
+  font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+.security-body .form-container form {
+  padding: 80px 8% 30px 8%;
+}
+.security-body .form-container form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+.security-body .form-container form .form-group label {
+  font-weight: 400;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.security-body .form-container form .form-group input {
+  font-weight: 500;
+  font-size: 20px;
+  height: 58px;
+  border-color: #666666;
+}
+.security-body .form-container .security-link {
+  text-align: center;
+}
+.security-body .form-container .security-link a {
+  text-decoration: underline;
+  color: #666666;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #FFFDF7;
+  margin: 0;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #565656;
+  color: white;
+  border: none;
+  padding: 30px;
+  text-align: center;
+}
+
+.btn-fullwidth {
+  width: 100%;
+}
+
+footer {
+  background-color: white;
+}
+
+/*# sourceMappingURL=main.css.map */

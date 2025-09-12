@@ -1,0 +1,6 @@
+#translations/security.fr.yaml
+Invalid CSRF token: Jeton CSRF invalide
+Invalid Credentials: Identifiants invalides
+Account is locked: Le compte est verrouillé
+Account is disabled: Le compte est désactivé
+Account is expired: Le compte a expiré

@@ -1,32 +1,76 @@
 # Makefile pour simplifier la gestion de Docker
 
-# Lance les conteneurs en arrière-plan
+# Variable pour raccourcir les commandes
+DC = docker-compose --env-file .env.docker
+
+# 1. Définit l'aide pour l'utilisation du Makefile
+.PHONY: help
+help:
+	@echo "Makefile pour gérer les conteneurs Docker et les tâches courantes."
+	@echo ""
+	@echo "Commandes disponibles :"
+	@echo "  make install      : Construit et lance les conteneurs, installe les dépendances et prépare le projet."
+	@echo "  make up           : Démarre les conteneurs"
+	@echo "  make down         : Arrête les conteneurs"
+	@echo "  make watch        : Compile le SCSS en direct (à lancer dans une console séparée)"
+	@echo "  make fix-perms    : Corrige les permissions des dossiers var/ et public/"
+	@echo "  make cache        : Vide le cache de Symfony"
+	@echo "  make prune        : Arrête et supprime les conteneurs et les données (volumes)"
+	@echo "  make restart      : Redémarre les conteneurs"
+	@echo ""
+
+# 1. Construit et lance les conteneurs
+# 2. Installe les outils (npm, sass) et les dépendances (composer)
+.PHONY: install
+install: up
+	@echo "Installation des dépendances Composer..."
+	$(DC) exec php composer install
+	sleep 4
+	$(DC) exec php bin/console doctrine:database:create --if-not-exists
+	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
+	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
+	$(MAKE) fix-perms
+	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
+	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
+
+# Démarre les conteneurs (ou les reconstruit si des fichiers ont changé)
+.PHONY: up
 up:
-	docker-compose --env-file .env.docker up -d --build && \
-    	echo "Attente de 5s pour la stabilisation des conteneurs..." && \
-    	sleep 5 && \
-    	docker-compose --env-file .env.docker exec php chown -R www-data:www-data /code/var
+	@echo "Lancement des conteneurs..."
+	$(DC) up -d --build
+	@echo "Vous pouvez utiliser 'make watch' dans un autre terminal pour compiler le SCSS en direct."
 
-# Arrête et supprime les conteneurs
+# Arrête les conteneurs
+.PHONY: down
 down:
-	docker-compose --env-file .env.docker down
+	@echo "Arrêt des conteneurs..."
+	$(DC) down
 
-# Vider les données
+# Compile le SCSS en direct (à lancer dans un terminal séparé)
+.PHONY: watch
+watch:
+	@echo "👀 Lancement du watch SCSS... (CTRL+C pour arrêter)"
+	$(DC) exec php sass --watch assets/scss/main.scss:assets/css/main.css
+
+# Corrige les permissions des dossiers var/ et public/
+.PHONY: fix-perms
+fix-perms:
+	@echo "Correction des permissions pour les dossiers var/ et public/..."
+	$(DC) exec php sh -c 'setfacl -R -m u:www-data:rwX -m u:$(whoami):rwX var public || true'
+	$(DC) exec php sh -c 'setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwX var public || true'
+
+# Vide le cache de Symfony
+.PHONY: cache
+cache:
+	@echo "Nettoyage du cache Symfony..."
+	$(DC) exec php bin/console cache:clear
+
+# Arrête et supprime les données (volumes)
+.PHONY: prune
 prune:
-	docker-compose --env-file .env.docker down -v
-
-# Affiche les logs en temps réel
-logs:
-	docker-compose --env-file .env.docker logs -f
-
-# Démarre les conteneurs
-start:
-	docker-compose --env-file .env.docker up -d
+	@echo "ATTENTION : Suppression des conteneurs et de toutes les données..."
+	$(DC) down -v
 
 # Redémarre les conteneurs
-restart:
-	docker-compose --env-file .env.docker restart
-
-#Vider la cache Symfony
-cache:
-	docker-compose exec php console cache:clear
+.PHONY: restart
+restart: down up
