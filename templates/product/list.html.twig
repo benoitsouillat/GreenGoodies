@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Nos produits {% endblock %}
+
+{% block body %}
+
+    <h1>Tous les produits</h1>
+    <section class="product-list">
+        {% for product in products %}
+            {% include 'product/homeCard.html.twig' %}
+        {% else %}
+            <p>Aucun produit trouvé</p>
+        {% endfor %}
+    </section>
+{% endblock %}

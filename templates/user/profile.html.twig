@@ -1,5 +1,42 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>Bonjour {{ app.user.firstname }} {{ app.user.lastname }}</p>
+    <main class="profile-page">
+        <h1>Mon compte</h1>
+        {% if orders is not empty %}
+        <section class="orders-list">
+            <h2>Mes commandes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Date</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.orderNumber }}</td>
+                        <td>{{ order.validatedAt|date('d/m/Y') }}</td>
+                        <td>{{ order.totalPrice }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        {% else %}
+            <section class="orders-list">
+                <h2>Mes commandes</h2>
+                <p>Aucune commande</p>
+            </section>
+        {% endif %}
+        <section class="api-access">
+            <h2>Mon accès API</h2>
+            <a href="#" class="btn btn-fullwidth">Activer mon accès API</a>
+        </section>
+        <section class="account-actions">
+            <a href="{{ path('app_user_delete_account') }}" class="btn btn-fullwidth">Supprimer mon compte</a>
+        </section>
+    </main>
 {% endblock %}

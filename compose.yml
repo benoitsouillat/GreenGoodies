@@ -13,10 +13,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    user: "${UID}:${GID}"
+    environment:
+        - COMPOSER_ALLOW_SUPERUSER=1
     container_name: php-${PROJECT_NAME}
     volumes:
       - ./:/code
-      - var_data:/code/var
+     # - var_data:/code/var
     networks:
       - symfony_network
   database:

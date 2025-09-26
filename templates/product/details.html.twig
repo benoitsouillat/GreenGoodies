@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+
+    <article class="product-details-page">
+         <div class="product-image">
+{#
+             <img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
+#}
+             <img src="{{ product.image }}" alt="{{ product.name }}">
+         </div>
+        <div class="product-info">
+            <h1>{{ product.name }}</h1>
+            <p class="price">{{ product.unitPrice }} €</p>
+            <p class="description"><span>Description</span><br>{{ product.longDesc|nl2br }}</p>
+            {% if app.user %}
+                <div class="actions" id="cart-actions">
+                    <form action="{{ path('app_product_add_to_cart', { id: product.id}) }}" method="post">
+                        {% if quantityInCart > 0 %}
+                            <label for="quantity">Quantité</label>
+                            <input type="number" name="quantity" id="quantity" value="{{ quantityInCart }}">
+                        {% endif %}
+                        <button type="submit" class="btn btn-fullwidth">
+                            {% if quantityInCart == 0 %}Ajouter au panier{% else %}Mettre à jour{% endif %}
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </article>
+
+{% endblock %}

@@ -1,1 +1,22 @@
 {% extends 'base.html.twig' %}
+
+{% block title %} Mon panier {% endblock %}
+
+{% block body %}
+    <main class="profile-page">
+        <h1>Mon panier</h1>
+        {% if order.orderlines is not empty %}
+            <a href="{{ path('app_user_basket_reset') }}">Vider le panier</a>
+            {% for orderline in order.orderLines %}
+                {% include 'product/basketCard.html.twig' %}
+            {% endfor %}
+            <hr>
+            <p>Total : {{ order.getTotalPrice() }} €</p>
+            <p class="shipping-fee">Frais de livraison : offert</p>
+            <a href="{{ path('app_user_order_validate') }}" class="btn btn-fullwidth">Valider la commande</a>
+        {% endif %}
+        {% if order.orderlines is empty %}
+            <p>Votre panier est vide</p>
+        {% endif %}
+    </main>
+{% endblock %}

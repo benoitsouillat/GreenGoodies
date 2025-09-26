@@ -1,0 +1,12 @@
+<turbo-stream target="cart-actions" action="update">
+    <template>
+        <form action="{{ path('app_user_basket_update', { id: product.id}) }}" method="post">
+
+                {{ form_row(quantityForm.quantity) }}
+
+            <button type="submit" class="btn btn-fullwidth">
+                {% if quantityInCart == 0 %}Ajouter au panier{% else %}Mettre à jour{% endif %}
+            </button>
+        </form>
+    </template>
+</turbo-stream>

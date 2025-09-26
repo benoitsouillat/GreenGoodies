@@ -30,6 +30,7 @@ install: up
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
 	$(MAKE) fix-perms
+	# $(MAKE) chown
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
 
@@ -55,9 +56,14 @@ watch:
 # Corrige les permissions des dossiers var/ et public/
 .PHONY: fix-perms
 fix-perms:
-	@echo "Correction des permissions pour les dossiers var/ et public/..."
-	$(DC) exec php sh -c 'setfacl -R -m u:www-data:rwX -m u:$(whoami):rwX var public || true'
-	$(DC) exec php sh -c 'setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwX var public || true'
+	@echo "Correction des permissions pour les dossiers var/ et public/... $(whoami)"
+	$(DC) exec php sh -c 'setfacl -R -m u:www-data:rwX -m u:$(whoami):rwX . || true'
+	$(DC) exec php sh -c 'setfacl -dR -m u:www-data:rwX -m u:$(whoami):rwX . || true'
+
+.PHONY: fix-owner
+fix-owner:
+	@echo "Correction du propriétaire côté WSL..."
+	sudo chown -R $$(id -u):$$(id -g) .
 
 # Vide le cache de Symfony
 .PHONY: cache
@@ -70,6 +76,11 @@ cache:
 prune:
 	@echo "ATTENTION : Suppression des conteneurs et de toutes les données..."
 	$(DC) down -v
+
+.PHONY: chown
+chown:
+	@echo "Correction du propriétaire côté WSL..."
+	sudo chown -R $$(id -u):$$(id -g) var public
 
 # Redémarre les conteneurs
 .PHONY: restart

@@ -33,7 +33,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Votre compte a bien été créé.');
 
-            return $security->login($user, AppAuthenticator::class, 'main');
+            if ($security->login($user, AppAuthenticator::class, 'main')) {
+                return $this->redirectToRoute('app_home');
+            }
         }
 
         return $this->render('registration/register.html.twig', [
