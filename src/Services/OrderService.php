@@ -34,6 +34,17 @@ class OrderService
         $this->manager->flush();
     }
 
+    private function updateTotalPrice(Order $order): void
+    {
+        $totalPrice = 0;
+        foreach ($order->getOrderLines() as $orderLine) {
+            $totalPrice += $orderLine->getProduct()->getUnitPrice() * $orderLine->getQuantity();
+        }
+        $order->setTotalPrice($totalPrice);
+        $this->manager->persist($order);
+        $this->manager->flush();
+    }
+
     public function validateOrder(): bool
     {
         $order = $this->getCurrentOrder();
@@ -53,17 +64,6 @@ class OrderService
         foreach ($currentOrder->getOrderLines() as $orderLine) {
             $this->manager->remove($orderLine);
         }
-        $this->manager->flush();
-    }
-
-    private function updateTotalPrice(Order $order): void
-    {
-        $totalPrice = 0;
-        foreach ($order->getOrderLines() as $orderLine) {
-            $totalPrice += $orderLine->getProduct()->getUnitPrice() * $orderLine->getQuantity();
-        }
-        $order->setTotalPrice($totalPrice);
-        $this->manager->persist($order);
         $this->manager->flush();
     }
 

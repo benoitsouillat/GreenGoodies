@@ -33,7 +33,7 @@
         {% endif %}
         <section class="api-access">
             <h2>Mon accès API</h2>
-            <a href="#" class="btn btn-fullwidth">Activer mon accès API</a>
+            <a href="{{ path('app_user_toggle_api_access') }}" class="btn btn-fullwidth">{% if user.isApiAccess() %}Désactiver{% else %}Activer{% endif%} mon accès API</a>
         </section>
         <section class="account-actions">
             <a href="{{ path('app_user_delete_account') }}" class="btn btn-fullwidth">Supprimer mon compte</a>

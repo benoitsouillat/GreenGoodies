@@ -5,32 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ad213a7d-95e3-4083-9d98-c2309d0c0199" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.docker" beforeDir="false" afterPath="$PROJECT_DIR$/.env.docker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/greengoodies.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/greengoodies.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/main.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/includes/_footer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/includes/_footer.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/includes/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/includes/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/includes/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/includes/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/main.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.dist.xml" beforeDir="false" afterPath="$PROJECT_DIR$/phpunit.dist.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegistrationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegistrationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/OrderService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_partials/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_partials/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/basket.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/basket.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/user/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -185,6 +174,24 @@
       <path value="$PROJECT_DIR$/vendor/zenstruck/assert" />
       <path value="$PROJECT_DIR$/vendor/jms/metadata" />
       <path value="$PROJECT_DIR$/vendor/vich/uploader-bundle" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/metadata" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/http-cache" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/validator" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/state" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/serializer" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/symfony" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/documentation" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/openapi" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/hydra" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/jsonld" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/doctrine-common" />
+      <path value="$PROJECT_DIR$/vendor/willdurand/negotiation" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/cors-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/vendor/api-platform/doctrine-orm" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -250,6 +257,10 @@
       <workItem from="1758538136418" duration="1404000" />
       <workItem from="1758643418486" duration="715000" />
       <workItem from="1758711254966" duration="8000" />
+      <workItem from="1758876569902" duration="24327000" />
+      <workItem from="1759142017305" duration="2676000" />
+      <workItem from="1759219556577" duration="767000" />
+      <workItem from="1759221565671" duration="1099000" />
     </task>
     <servers />
   </component>

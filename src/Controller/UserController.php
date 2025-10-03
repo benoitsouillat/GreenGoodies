@@ -25,7 +25,8 @@ final class UserController extends AbstractController
     public function profile(): Response
     {
         return $this->render('user/profile.html.twig', [
-            'orders' => $this->manager->getRepository(Order::class)->findLastOrdersWithLimit(5)
+            'orders' => $this->manager->getRepository(Order::class)->findLastOrdersWithLimit(5),
+            'user' => $this->getUser()
         ]);
     }
 
@@ -56,6 +57,17 @@ final class UserController extends AbstractController
     {
         $orderService->resetOrder();
         return $this->redirectToRoute('app_user_basket');
+    }
+
+    #[Route('/toggleApi', name: 'toggle_api_access' ,methods: ['GET'])]
+    public function toggleApiAccess(): Response
+    {
+        $user = $this->getUser();
+        $user->setApiAccess(!$user->isApiAccess());
+        $this->manager->persist($user);
+        $this->manager->flush();
+
+        return $this->redirectToRoute('app_user_profile');
     }
 
     #[Route('/account-delete', name: 'delete_account')]

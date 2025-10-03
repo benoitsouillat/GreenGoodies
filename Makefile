@@ -29,12 +29,12 @@ install: up
 	$(DC) exec php bin/console doctrine:database:create --if-not-exists
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
-	$(MAKE) fix-perms
+	$(MAKE) fix-owner
 	# $(MAKE) chown
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
 
-# Démarre les conteneurs (ou les reconstruit si des fichiers ont changé)
+# Démarre les conteneurs
 .PHONY: up
 up:
 	@echo "Lancement des conteneurs..."
@@ -47,7 +47,7 @@ down:
 	@echo "Arrêt des conteneurs..."
 	$(DC) down
 
-# Compile le SCSS en direct (à lancer dans un terminal séparé)
+# Compile le SCSS en direct
 .PHONY: watch
 watch:
 	@echo "👀 Lancement du watch SCSS... (CTRL+C pour arrêter)"

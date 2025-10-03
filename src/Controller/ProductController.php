@@ -8,9 +8,11 @@ use App\Repository\ProductRepository;
 use App\Services\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 final class ProductController extends AbstractController
 {
@@ -25,6 +27,13 @@ final class ProductController extends AbstractController
         return $this->render('product/list.html.twig', [
             'products' => $products,
         ]);
+    }
+    #[Route('/api/products', name: 'api_products', methods: ['GET'])]
+    public function api_list(SerializerInterface $serializer,): JsonResponse
+    {
+        $products = $this->manager->getRepository(Product::class)->findAll();
+        $json = $serializer->serialize($products, 'json', ['groups' => 'getProducts']);
+        return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
 
     #[Route('/product/{id}', name: 'app_product_details', requirements: ['id' => '\d+'], methods: ['GET'])]
