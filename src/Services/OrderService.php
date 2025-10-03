@@ -67,9 +67,12 @@ class OrderService
         $this->manager->flush();
     }
 
-    public function getCurrentOrder(): Order
+    public function getCurrentOrder(): ?Order
     {
         $user = $this->getUser();
+        if (!$user) {
+            return null;
+        }
         $currentOrder = $this->manager->getRepository(Order::class)->findOneBy([
             'user' => $user,
             'status' => OrderStatus::basket,
@@ -88,7 +91,11 @@ class OrderService
     }
 
     public function getOrderLine(Product $product): ?OrderLine {
-        $line  =$this->getCurrentOrder()->getOrderLines()->filter(
+        $order = $this->getCurrentOrder();
+        if (!$order) {
+            return null;
+        }
+        $line = $order->getOrderLines()->filter(
             function (OrderLine $line) use ($product) {
                 return $line->getProduct()->getId() === $product->getId();
             })->first();

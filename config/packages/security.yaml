@@ -13,6 +13,16 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api
+            stateless: true
+            json_login:
+                check_path: /api/login
+                username_path: email # Précision du champ username pour jwt
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+            jwt:
+                authenticator: app.api_authenticator
         main:
             lazy: true
             provider: app_user_provider
@@ -20,19 +30,6 @@ security:
             logout:
                 path: app_logout
                 target: app_index
-                # where to redirect after logout
-            remember_me:
-                secret: '%kernel.secret%'
-                lifetime: 604800
-                path: /
-        api:
-            pattern:   ^/api
-            stateless: true
-            jwt: ~
-        login:
-            pattern: ^/api/login
-            success_handler: lexik_jwt_authentication.handler.authentication_success
-            failure_handler: lexik_jwt_authentication.handler.authentication_failure
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:

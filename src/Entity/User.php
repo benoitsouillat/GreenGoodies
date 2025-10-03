@@ -219,4 +219,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /** Méthode GetUserName()pour faire fonctionner JWT **/
+    public function getUsername(): string
+    {
+        return $this->getUserIdentifier();
+    }
+
 }

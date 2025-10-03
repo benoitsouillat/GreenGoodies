@@ -9,6 +9,7 @@ use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -26,21 +27,26 @@ class Product
     private ?int $id = null;
 
     #[Assert\NotBlank()]
+    #[Groups(['getProducts'])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Groups(['getProducts'])]
     #[ORM\Column]
     private ?float $unitPrice = null;
 
+    #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $shortDesc = null;
 
+    #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $longDesc = null;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'image')]
     private ?File $imageFile = null;
 
+    #[Groups(['getProducts'])]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
