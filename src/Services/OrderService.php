@@ -23,17 +23,27 @@ class OrderService
         return $user instanceof User ? $user : null;
     }
 
+    /**
+     * Crée une nouvelle commande pour l'utilisateur connecté avec le statut "cart" et initialise ses propriétés.
+     * @param Order $order
+     * @return void
+     */
     private function makeOrder(Order $order): void
     {
         $order->setStatus(OrderStatus::cart)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setUser($this->getUser())
                 ->setTotalPrice(0)
-                ->setOrderNumber(uniqid('ORDER-'));
+                ->setOrderNumber(uniqid(''));
         $this->manager->persist($order);
         $this->manager->flush();
     }
 
+    /**
+     * Met à jour le prix total de la commande en fonction des lignes de commande associées.
+     * @param Order $order
+     * @return void
+     */
     private function updateTotalPrice(Order $order): void
     {
         $totalPrice = 0;
@@ -45,6 +55,10 @@ class OrderService
         $this->manager->flush();
     }
 
+    /**
+     * Valide la commande en cours de l'utilisateur connecté en changeant son statut et en définissant la date de validation.
+     * @return bool Retourne true si la commande a été validée avec succès, false si aucune ligne de la commande n'existe.
+     */
     public function validateOrder(): bool
     {
         $order = $this->getCurrentOrder();
@@ -58,6 +72,10 @@ class OrderService
         return true;
     }
 
+    /**
+     * Réinitialise la commande en cours en supprimant toutes ses lignes de la commande.
+     * @return void
+     */
     public function resetOrder(): void
     {
         $currentOrder = $this->getCurrentOrder();
@@ -67,6 +85,10 @@ class OrderService
         $this->manager->flush();
     }
 
+    /**
+     * Récupère la commande en cours pour l'utilisateur connecté ou en crée une nouvelle si aucune n'existe.
+     * @return Order|null
+     */
     public function getCurrentOrder(): ?Order
     {
         $user = $this->getUser();
@@ -90,6 +112,11 @@ class OrderService
         return $currentOrder;
     }
 
+    /**
+     * Récupère la ligne de la commande pour un produit donné dans la commande en cours pour l'utilisateur connecté.
+     * @param Product $product
+     * @return OrderLine|null
+     */
     public function getOrderLine(Product $product): ?OrderLine {
         $order = $this->getCurrentOrder();
         if (!$order) {
@@ -102,11 +129,22 @@ class OrderService
         return $line === false ? null : $line;
     }
 
+    /**
+     * Récupère la quantité d'un produit donné dans la commande en cours de l'utilisateur connecté.
+     * @param Product $product
+     * @return int
+     */
     public function getOrderLineQuantity(Product $product): int {
         $orderLine = $this->getOrderLine($product) ?? null;
         return !($orderLine) ? 0 : $orderLine->getQuantity();
     }
 
+    /**
+     * Met à jour la quantité d'un produit dans la commande en cours de l'utilisateur connecté.
+     * @param Product $product
+     * @param int $quantity
+     * @return OrderLine
+     */
     public function setOrderLineQuantity(Product $product, int $quantity): OrderLine
     {
         $orderLine = $this->getOrderLine($product) ?? new OrderLine();
@@ -119,6 +157,11 @@ class OrderService
         return $orderLine;
     }
 
+    /**
+     * Supprime la ligne de commande pour un produit donné dans la commande en cours de l'utilisateur connecté.
+     * @param Product $product
+     * @return void
+     */
     public function removeOrderLine(Product $product): void
     {
         $orderLine = $this->getOrderLine($product);

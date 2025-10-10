@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad213a7d-95e3-4083-9d98-c2309d0c0199" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/order.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/order.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/profile.html.twig" afterDir="false" />
-    </list>
+    <list default="true" id="ad213a7d-95e3-4083-9d98-c2309d0c0199" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -261,7 +254,7 @@
       <workItem from="1759221565671" duration="1099000" />
       <workItem from="1759475652638" duration="16811000" />
       <workItem from="1760080624148" duration="77000" />
-      <workItem from="1760087115968" duration="5121000" />
+      <workItem from="1760087115968" duration="5454000" />
     </task>
     <servers />
   </component>
