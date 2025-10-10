@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use App\Form\OrderLineType;
 use App\Services\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,18 +38,47 @@ final class ProductController extends AbstractController
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
 
-    #[Route('/product/{id}', name: 'app_product_details', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function details(Product $product, OrderService $orderService): Response
+    #[Route('/product/{id}', name: 'app_product_details', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function details(Request $request, Product $product, OrderService $orderService): Response
     {
+        $quantityInCart = $orderService->getOrderLineQuantity($product) ?? 0;
+        $form = $this->createForm(OrderLineType::class, $orderService->getOrderLine($product), []);
+        if ($quantityInCart <= 0) {
+            $form->remove('quantity');
+        }
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /** Le produit n'existe pas dans le panier donc on le créé **/
+            if ($form->getData()->getQuantity() === null) {
+                $orderService->setOrderLineQuantity($product, 1);
+                $this->addFlash('success', sprintf("Le produit %s a bien été ajouté à votre panier", $product->getName()));
+                return $this->redirectToRoute('app_product_details', ['id' => $product->getId()]);
+            }
+            /** Le produit existe dans le panier, on le retire **/
+            else if ($form->get('quantity')->getData() <= 0) {
+                $orderService->removeOrderLine($product);
+                $this->addFlash('success', sprintf("Le produit %s a bien été retiré de votre panier", $product->getName()));
+                return $this->redirectToRoute('app_products');
+            }
+            /** Le produit existe dans le panier, on met à jour la quantité **/
+            else {
+                $orderService->setOrderLineQuantity($product, $form->get('quantity')->getData());
+                $this->addFlash('success',"Le panier a bien été mis à jour");
+                return $this->redirectToRoute('app_user_basket');
+            }
+        }
         return $this->render('product/details.html.twig', [
+            'form' => $form->createView(),
             'product' => $product,
-            'quantityInCart' => $orderService->getOrderLineQuantity($product) ?? 0
+            'quantityInCart' => $quantityInCart
         ]);
     }
-
+/*
     #[Route('/product/{id}/add', name: 'app_product_add_to_cart', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function addToCart(Request $request, Product $product, OrderService $orderService): Response
     {
+        dd($request->request->get('quantity'));
         $quantity = $orderService->getOrderLineQuantity($product);
         $orderLine = $orderService->setOrderLineQuantity($product, $request->request->get('quantity', 1));
         if ($quantity == 0 && $orderLine->getQuantity() == 1) {
@@ -59,6 +89,5 @@ final class ProductController extends AbstractController
             $this->addFlash('success',"Le panier a bien été mis à jour");
             return $this->redirectToRoute('app_user_basket');
         }
-    }
-
+    }*/
 }

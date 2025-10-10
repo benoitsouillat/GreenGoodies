@@ -25,7 +25,7 @@ final class UserController extends AbstractController
     public function profile(): Response
     {
         return $this->render('user/profile.html.twig', [
-            'orders' => $this->manager->getRepository(Order::class)->findLastOrdersWithLimit(5),
+            'orders' => $this->manager->getRepository(Order::class)->findLastOrdersWithLimit($this->getUser(),5),
             'user' => $this->getUser()
         ]);
     }

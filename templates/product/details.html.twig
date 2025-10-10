@@ -15,21 +15,18 @@
             <h1>{{ product.name }}</h1>
             <p class="price">{{ product.price }} €</p>
             <p class="description"><span>Description</span><br>{{ product.longDescription|nl2br }}</p>
-                <div class="actions" id="cart-actions">
-                    {% if app.user %}
-                            <form action="{{ path('app_product_add_to_cart', { id: product.id}) }}" method="post">
-                                {% if quantityInCart > 0 %}
-                                    <label for="quantity">Quantité</label>
-                                    <input type="number" name="quantity" id="quantity" value="{{ quantityInCart }}">
-                                {% endif %}
-                                <button type="submit" class="btn btn-fullwidth">
-                                    {% if quantityInCart == 0 %}Ajouter au panier{% else %}Mettre à jour{% endif %}
-                                </button>
-                            </form>
-                    {% else %}
-                        <p><a href="{{ path('app_login') }}" class="btn btn-fullwidth">Se connecter</a></p>
-                    {% endif %}
-                </div>
+            <div class="actions" id="cart-actions">
+                {% if app.user %}
+                    {{ form_start(form) }}
+                    {% if quantityInCart > 0 %} {{ form_row(form.quantity) }}{% endif %}
+                        <button type="submit" class="btn btn-fullwidth">
+                            {{ quantityInCart == 0 ? 'Ajouter au panier' : 'Mettre à jour' }}
+                        </button>
+                    {{ form_end(form) }}
+                {% else %}
+                    <p><a href="{{ path('app_login') }}" class="btn btn-fullwidth">Se connecter</a></p>
+                {% endif %}
+            </div>
         </div>
     </article>
 

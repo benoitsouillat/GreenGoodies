@@ -119,5 +119,14 @@ class OrderService
         return $orderLine;
     }
 
+    public function removeOrderLine(Product $product): void
+    {
+        $orderLine = $this->getOrderLine($product);
+        if ($orderLine) {
+            $this->manager->remove($orderLine);
+            $this->manager->flush();
+            $this->updateTotalPrice($this->getCurrentOrder());
+        }
+    }
 
 }
