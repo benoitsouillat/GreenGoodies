@@ -13,7 +13,7 @@ final class MainController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ProductRepository $productRepo): Response
     {
-        $products = $productRepo->findAllWithLimit($limit = 9);
+        $products = $productRepo->findAllWithLimit(9);
         return $this->render('main/index.html.twig', [
             'products' => $products,
             ]
