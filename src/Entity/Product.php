@@ -2,9 +2,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Metadata\ApiProperty;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Get;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,11 +10,6 @@ use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-
-#[ApiResource(
-    security: "is_granted('API_ACCESS')"
-)]
-#[Get]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -33,22 +25,22 @@ class Product
 
     #[Groups(['getProducts'])]
     #[ORM\Column]
-    private ?float $unitPrice = null;
+    private ?float $price = null;
 
     #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $shortDesc = null;
+    private ?string $shortDescription = null;
 
     #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $longDesc = null;
+    private ?string $longDescription = null;
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'image')]
     private ?File $imageFile = null;
 
     #[Groups(['getProducts'])]
     #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    private ?string $picture = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
@@ -86,50 +78,50 @@ class Product
         return $this;
     }
 
-    public function getUnitPrice(): ?float
+    public function getPrice(): ?float
     {
-        return $this->unitPrice;
+        return $this->price;
     }
 
-    public function setUnitPrice(float $unitPrice): static
+    public function setPrice(float $price): static
     {
-        $this->unitPrice = $unitPrice;
+        $this->price = $price;
 
         return $this;
     }
 
-    public function getShortDesc(): ?string
+    public function getShortDescription(): ?string
     {
-        return $this->shortDesc;
+        return $this->shortDescription;
     }
 
-    public function setShortDesc(string $shortDesc): static
+    public function setShortDescription(string $shortDescription): static
     {
-        $this->shortDesc = $shortDesc;
+        $this->shortDescription = $shortDescription;
 
         return $this;
     }
 
-    public function getLongDesc(): ?string
+    public function getLongDescription(): ?string
     {
-        return $this->longDesc;
+        return $this->longDescription;
     }
 
-    public function setLongDesc(string $longDesc): static
+    public function setLongDescription(string $longDescription): static
     {
-        $this->longDesc = $longDesc;
+        $this->longDescription = $longDescription;
 
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getPicture(): ?string
     {
-        return $this->image;
+        return $this->picture;
     }
 
-    public function setImage(string $image): static
+    public function setPicture(string $picture): static
     {
-        $this->image = $image;
+        $this->picture = $picture;
 
         return $this;
     }

@@ -38,7 +38,7 @@ class OrderService
     {
         $totalPrice = 0;
         foreach ($order->getOrderLines() as $orderLine) {
-            $totalPrice += $orderLine->getProduct()->getUnitPrice() * $orderLine->getQuantity();
+            $totalPrice += $orderLine->getProduct()->getPrice() * $orderLine->getQuantity();
         }
         $order->setTotalPrice($totalPrice);
         $this->manager->persist($order);

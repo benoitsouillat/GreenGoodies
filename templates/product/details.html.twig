@@ -9,12 +9,12 @@
 {#
              <img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
 #}
-             <img src="{{ product.image }}" alt="{{ product.name }}">
+             <img src="{{ product.picture }}" alt="{{ product.name }}">
          </div>
         <div class="product-info">
             <h1>{{ product.name }}</h1>
-            <p class="price">{{ product.unitPrice }} €</p>
-            <p class="description"><span>Description</span><br>{{ product.longDesc|nl2br }}</p>
+            <p class="price">{{ product.price }} €</p>
+            <p class="description"><span>Description</span><br>{{ product.longDescription|nl2br }}</p>
                 <div class="actions" id="cart-actions">
                     {% if app.user %}
                             <form action="{{ path('app_product_add_to_cart', { id: product.id}) }}" method="post">
