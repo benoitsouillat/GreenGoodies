@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail de la commande {% endblock %}
+
+{% block body %}
+    <main class="profile-page">
+        <h1>{{ order.orderNumber }}</h1>
+         <a href="{{ path('app_user_profile') }}">Retour à mon compte</a>
+         {% for orderline in order.orderLines %}
+             {% include 'product/cartCard.html.twig' %}
+         {% endfor %}
+         <hr>
+         <p>Total : {{ order.getTotalPrice() }} €</p>
+         <p class="shipping-fee">Frais de livraison : offert</p>
+    </main>
+{% endblock %}

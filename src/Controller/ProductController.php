@@ -65,7 +65,7 @@ final class ProductController extends AbstractController
             else {
                 $orderService->setOrderLineQuantity($product, $form->get('quantity')->getData());
                 $this->addFlash('success',"Le panier a bien été mis à jour");
-                return $this->redirectToRoute('app_user_basket');
+                return $this->redirectToRoute('app_cart');
             }
         }
         return $this->render('product/details.html.twig', [
@@ -74,20 +74,5 @@ final class ProductController extends AbstractController
             'quantityInCart' => $quantityInCart
         ]);
     }
-/*
-    #[Route('/product/{id}/add', name: 'app_product_add_to_cart', requirements: ['id' => '\d+'], methods: ['POST'])]
-    public function addToCart(Request $request, Product $product, OrderService $orderService): Response
-    {
-        dd($request->request->get('quantity'));
-        $quantity = $orderService->getOrderLineQuantity($product);
-        $orderLine = $orderService->setOrderLineQuantity($product, $request->request->get('quantity', 1));
-        if ($quantity == 0 && $orderLine->getQuantity() == 1) {
-            $this->addFlash('success', sprintf("Le produit %s a bien été ajouté à votre panier", $product->getName()));
-            return $this->redirectToRoute('app_product_details', ['id' => $product->getId()]);
-        }
-        else {
-            $this->addFlash('success',"Le panier a bien été mis à jour");
-            return $this->redirectToRoute('app_user_basket');
-        }
-    }*/
+
 }

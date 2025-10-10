@@ -4,6 +4,6 @@ namespace App\Enum;
 
 enum OrderStatus: string
 {
-    case basket = "Panier";
+    case cart = "Panier";
     case validated = "Validée";
 }

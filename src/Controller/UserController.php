@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Order;
-use App\Form\OrderLineType;
-use App\Services\OrderService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -16,7 +14,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('', name: 'app_user_')]
 final class UserController extends AbstractController
 {
-
     public function __construct(
         public readonly EntityManagerInterface $manager
     ) {}
@@ -28,35 +25,6 @@ final class UserController extends AbstractController
             'orders' => $this->manager->getRepository(Order::class)->findLastOrdersWithLimit($this->getUser(),5),
             'user' => $this->getUser()
         ]);
-    }
-
-    #[Route('/basket', name: 'basket')]
-    public function basket(OrderService $orderService): Response
-    {
-        $currentOrder = $orderService->getCurrentOrder();
-        $form = $this->createForm(OrderLineType::class);
-
-        return $this->render('user/basket.html.twig', [
-            'user' => $this->getUser(),
-            'order' => $currentOrder,
-        ]);
-    }
-
-    #[Route('/order/validate', name: 'order_validate')]
-    public function validateBasket(OrderService $orderService): Response
-    {
-        $orderService->validateOrder() ?
-            $this->addFlash('success', 'Votre commande a été validée avec succès.') :
-            $this->addFlash('warning', 'Votre panier est vide.');
-
-        return $this->redirectToRoute('app_user_profile');
-    }
-
-    #[Route('/basket/clear', name: 'basket_reset')]
-    public function clearBasket(OrderService $orderService): Response
-    {
-        $orderService->resetOrder();
-        return $this->redirectToRoute('app_user_basket');
     }
 
     #[Route('/toggleApi', name: 'toggle_api_access' ,methods: ['GET'])]

@@ -25,7 +25,7 @@ class OrderService
 
     private function makeOrder(Order $order): void
     {
-        $order->setStatus(OrderStatus::basket)
+        $order->setStatus(OrderStatus::cart)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setUser($this->getUser())
                 ->setTotalPrice(0)
@@ -75,7 +75,7 @@ class OrderService
         }
         $currentOrder = $this->manager->getRepository(Order::class)->findOneBy([
             'user' => $user,
-            'status' => OrderStatus::basket,
+            'status' => OrderStatus::cart,
         ]);
 
         if (!$currentOrder) {

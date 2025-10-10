@@ -35,10 +35,10 @@ final class ProductFactory extends PersistentProxyObjectFactory
     {
         return [
             'name' => self::faker()->text(random_int(5, 25)),
-            'shortDesc' => self::faker()->text(),
-            'longDesc' => self::faker()->text(),
-            'unitPrice' => self::faker()->randomFloat(2, 1, 1000),
-            'image' => 'https://picsum.photos/seed/' . self::faker()->unique()->numberBetween(1, 1000) . '/400/300',
+            'shortDescription' => self::faker()->text(),
+            'longDescription' => self::faker()->text(),
+            'price' => self::faker()->randomFloat(2, 1, 1000),
+            'picture' => 'https://picsum.photos/seed/' . self::faker()->unique()->numberBetween(1, 1000) . '/400/300',
         ];
     }
 
