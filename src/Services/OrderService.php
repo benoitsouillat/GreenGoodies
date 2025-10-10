@@ -30,11 +30,15 @@ class OrderService
      */
     private function makeOrder(Order $order): void
     {
+        /** Génère un nombre aléatoire à partir de la date et de mt_rand | résultat plus propre que uniqid() **/
+        $datePart = (new \DateTime())->format('Y-md-His');
+        $randomPart = mt_rand(10, 99);
+
         $order->setStatus(OrderStatus::cart)
                 ->setCreatedAt(new \DateTimeImmutable())
                 ->setUser($this->getUser())
                 ->setTotalPrice(0)
-                ->setOrderNumber(uniqid(''));
+                ->setOrderNumber($datePart . '-' . $randomPart);
         $this->manager->persist($order);
         $this->manager->flush();
     }

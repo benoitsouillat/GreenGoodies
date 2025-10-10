@@ -19,7 +19,7 @@
                     <tr>
                         <td><a href="{{ path('app_order_details', { id: order.id }) }}">{{ order.orderNumber }}</a></td>
                         <td>{{ order.validatedAt|date('d/m/Y') }}</td>
-                        <td>{{ order.totalPrice }}</td>
+                        <td>{{ (order.totalPrice)|number_format(2) }} €</td>
                     </tr>
                 {% endfor %}
                 </tbody>
