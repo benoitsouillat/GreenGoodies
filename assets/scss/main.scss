@@ -15,6 +15,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    &:has(.profile-page) {
+        background-color: $cartBgColor;
+    }
+}
+
+h2 {
+    margin-bottom: 0;
 }
 
 .btn {
@@ -24,6 +31,11 @@ body {
     border: none;
     padding: 30px;
     text-align: center;
+    border-radius: 0;
+    &:hover {
+        background-color: darken($darkgrey, 10%);
+        color: #FFF;
+    }
 }
 
 .btn-fullwidth {
@@ -33,6 +45,11 @@ body {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.alert {
+    margin: 20px 15%;
+
 }
 
 footer {

@@ -13,9 +13,13 @@
             font-weight: 500;
             font-size: 64px;
             margin-bottom: 30px;
+            margin-left: calc(50% - 200px);
+            width: 400px;
         }
         p {
-            max-width: 400px;
+            width: 400px;
+            margin-left: calc(50% - 200px);
+
         }
     }
     .hero-image {
@@ -36,6 +40,7 @@
     }
 }
 .valeurs {
+    font-family: Inter, sans-serif;
     .feature-section {
         display: flex;
         justify-content: space-between;
@@ -44,15 +49,28 @@
     .feature-section--reversed {
         flex-direction: row-reverse;
         background-color: #E8F0E3;
+        .feature-content {
+            justify-content: flex-end;
+        }
     }
     .feature-content {
         display: flex;
         align-items: flex-end;
+        padding: 40px;
+        color: #333;
         .feature-content--text {
             display: flex;
             flex-direction: column;
             justify-content: center;
             flex-basis: 50%;
+            font-weight: 300;
+            font-size: 14px;
+            h2 {
+                text-transform: uppercase;
+                font-weight: 500;
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
         }
     }
 }

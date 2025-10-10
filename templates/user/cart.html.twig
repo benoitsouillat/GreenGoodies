@@ -3,17 +3,19 @@
 {% block title %} Mon panier {% endblock %}
 
 {% block body %}
-    <main class="profile-page">
+    <main class="profile-page cart">
         <h1>Mon panier</h1>
         {% if order.orderlines is not empty %}
-            <a href="{{ path('app_cart_reset') }}">Vider le panier</a>
+            <a href="{{ path('app_cart_reset') }}" class="breadcrumb-link">Vider le panier</a>
             {% for orderline in order.orderLines %}
                 {% include 'product/cartCard.html.twig' %}
             {% endfor %}
-            <hr>
-            <p>Total : {{ order.getTotalPrice() }} €</p>
-            <p class="shipping-fee">Frais de livraison : offert</p>
+            <div class="total-cart">
+                <p class="price">Total panier : <span>{{ order.getTotalPrice()|number_format(2, ',', ' ') }} €</span></p>
+                <p class="shipping-fee">Frais de livraison : offert</p>
+            </div>
             <a href="{{ path('app_order_validate') }}" class="btn btn-fullwidth">Valider la commande</a>
+
         {% endif %}
         {% if order.orderlines is empty %}
             <p>Votre panier est vide</p>

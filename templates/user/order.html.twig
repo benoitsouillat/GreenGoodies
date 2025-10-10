@@ -3,9 +3,9 @@
 {% block title %} Détail de la commande {% endblock %}
 
 {% block body %}
-    <main class="profile-page">
+    <main class="profile-page cart">
         <h1>Commande N°{{ order.orderNumber }} - le {{ order.validatedAt|date('d/m/Y') }}</h1>
-         <a href="{{ path('app_user_profile') }}">Retour à mon compte</a>
+         <a href="{{ path('app_user_profile') }}" class="breadcrumb-link">Retour à mon compte</a>
          {% for orderline in order.orderLines %}
              {% include 'product/cartCard.html.twig' %}
          {% endfor %}

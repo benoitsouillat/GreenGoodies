@@ -3,9 +3,9 @@
 {% block body %}
     <main class="profile-page">
         <h1>Mon compte</h1>
-        {% if orders is not empty %}
         <section class="orders-list">
             <h2>Mes commandes</h2>
+        {% if orders is not empty %}
             <table>
                 <thead>
                     <tr>
@@ -24,13 +24,10 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </section>
         {% else %}
-            <section class="orders-list">
-                <h2>Mes commandes</h2>
-                <p>Aucune commande</p>
-            </section>
+            <p>Aucune commande</p>
         {% endif %}
+        </section>
         <section class="api-access">
             <h2>Mon accès API</h2>
             <a href="{{ path('app_user_toggle_api_access') }}" class="btn btn-fullwidth">{% if user.isApiAccess() %}Désactiver{% else %}Activer{% endif%} mon accès API</a>

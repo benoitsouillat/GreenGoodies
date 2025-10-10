@@ -1,8 +1,8 @@
 <div class="product-basket-card">
-    <img src="{{ orderline.product.picture }}" alt="{{ orderline.product.name }}">
+    <div class="img-container"> <img src="{{ orderline.product.picture }}" alt="{{ orderline.product.name }}"></div>
     <div class="product-details">
         <h3>{{ orderline.product.name }}</h3>
-        <p>Quantité : {{ orderline.quantity }}</p>
-        <p>{{ orderline.product.price }} €</p>
+        <p class="quantity">Quantité : {{ orderline.quantity }}</p>
+        <p class="price">{{ orderline.product.price|number_format(2, ',', ' ') }} €</p>
     </div>
 </div>

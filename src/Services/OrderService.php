@@ -31,7 +31,7 @@ class OrderService
     private function makeOrder(Order $order): void
     {
         /** Génère un nombre aléatoire à partir de la date et de mt_rand | résultat plus propre que uniqid() **/
-        $datePart = (new \DateTime())->format('Y-md-His');
+        $datePart = (new \DateTime())->format('Ymd-His');
         $randomPart = mt_rand(10, 99);
 
         $order->setStatus(OrderStatus::cart)

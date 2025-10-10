@@ -1,12 +1,12 @@
 .profile-page {
     margin: 0 auto;
-    padding: 25px 0 50px 0;
+    padding: 25px 0 70px 0;
     width: 100%;
     max-width: 600px;
 
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 
     h1 {
         text-align: center;
@@ -15,9 +15,116 @@
     }
     > section {
         padding: 60px;
-        background-color: #FFF;
+        background-color: $white;
+    }
+}
+
+.profile-page {
+    h2 {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+    table {
+        font-size: 14px;
+        thead {
+            th {
+                color: $grey;
+                font-weight: 400;
+            }
+        }
+        tbody {
+            color: #333;
+            font-weight: 500;
+            tr {
+                height: 45px;
+                border-bottom: solid 1px $grey;
+                &:nth-last-child(1) {
+                    border-bottom: none;
+                }
+                a {
+                    color: $grey;
+                    text-decoration: none;
+                }
+                td {
+                    width: 33%;
+                }
+            }
+        }
+    }
+    &.cart {
+        .breadcrumb-link {
+            &::before {
+                content: "x ";
+                font-size: 12px;
+                padding-right: 5px;
+            }
+            font-size: 14px;
+            color: $grey;
+            text-decoration: none;
+        }
+        .product-basket-card {
+            width: 600px;
+            padding: 40px;
+            background-color: $white;
+            display: flex;
+           .img-container {
+                height: 150px;
+                width: 150px;
+                overflow: hidden;
+                img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+           }
+            .product-details {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-left: 55px;
+                font-size: 14px;
+                color: $black;
+                h3 {
+                    font-weight: 600;
+                    font-size: 14px;
+
+                }
+                p {
+                    font-weight: 400;
+                    color: $grey;
+                    &.price {
+                        font-weight: 500;
+                        font-size: 18px;
+                        color: $black;
+                    }
+                }
+            }
+        }
+        .total-cart {
+            padding: 24px 40px;
+            background-color: $white;
+            text-align: right;
+            margin-bottom: 30px;
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                color: #333;
+                margin-bottom: 6px;
+                span {
+                    font-weight: 400;
+                    font-size: 20px;
+                }
+                &.shipping-fee {
+                    color: $grey;
+                    font-weight: 400;
+                    font-size: 12px;
+                }
+            }
+        }
         .btn-fullwidth {
-            width: calc(100% - 60px);
+            margin: auto 10%;
+            width: 80%;
         }
     }
 }
