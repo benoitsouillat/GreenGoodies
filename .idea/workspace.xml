@@ -6,16 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ad213a7d-95e3-4083-9d98-c2309d0c0199" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Enum/OrderStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Enum/OrderStatus.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Factory/ProductFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/ProductFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/Voter/UserHasApiAccessVoter.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/Voter/UserHasApiAccessVoter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/OrderService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/_partials/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_partials/navbar.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/_partials/turboAddCartQuantity.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/basketCard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/cartCard.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/basket.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/cart.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventListener/ExceptionListener.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/order.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/order.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +261,7 @@
       <workItem from="1759221565671" duration="1099000" />
       <workItem from="1759475652638" duration="16811000" />
       <workItem from="1760080624148" duration="77000" />
-      <workItem from="1760087115968" duration="3977000" />
+      <workItem from="1760087115968" duration="5121000" />
     </task>
     <servers />
   </component>

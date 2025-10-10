@@ -4,7 +4,7 @@
 
 {% block body %}
     <main class="profile-page">
-        <h1>{{ order.orderNumber }}</h1>
+        <h1>Commande N°{{ order.orderNumber }} - le {{ order.validatedAt|date('d/m/Y') }}</h1>
          <a href="{{ path('app_user_profile') }}">Retour à mon compte</a>
          {% for orderline in order.orderLines %}
              {% include 'product/cartCard.html.twig' %}

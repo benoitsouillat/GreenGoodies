@@ -17,7 +17,7 @@
                 <tbody>
                 {% for order in orders %}
                     <tr>
-                        <td>{{ order.orderNumber }}</td>
+                        <td><a href="{{ path('app_order_details', { id: order.id }) }}">{{ order.orderNumber }}</a></td>
                         <td>{{ order.validatedAt|date('d/m/Y') }}</td>
                         <td>{{ order.totalPrice }}</td>
                     </tr>

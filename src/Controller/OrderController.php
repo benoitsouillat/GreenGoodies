@@ -41,7 +41,7 @@ final class OrderController extends AbstractController
         return $this->redirectToRoute('app_user_profile');
     }
 
-    #[Route('/order/details', name: 'order_details', requirements: ['id' => '\d+'])]
+    #[Route('/order/{id}/details', name: 'order_details', requirements: ['id' => '\d+'])]
     public function orderDetails(Order $order): Response
     {
         return $this->render('user/order.html.twig', [
