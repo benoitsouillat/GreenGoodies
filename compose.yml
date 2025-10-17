@@ -19,7 +19,6 @@ services:
     container_name: php-${PROJECT_NAME}
     volumes:
       - ./:/code
-     # - var_data:/code/var
     networks:
       - symfony_network
   database:
@@ -47,20 +46,9 @@ services:
       - "${HOST_PMA_PORT}:80"
     networks:
       - symfony_network
-  mailhog:
-    build:
-      context: .
-      dockerfile: Dockerfile.mailhog
-    container_name: mailhog-${PROJECT_NAME}
-    ports:
-      - "${HOST_SMTP_PORT}:1025"   # Port SMTP
-      - "${HOST_WEBMAILHOG_PORT}:8025"   # Interface web
-    networks:
-      - symfony_network
 
 volumes:
   data:
-  var_data:
 
 networks:
   symfony_network:
