@@ -1,32 +1,30 @@
 # GreenGoodies - E-commerce
 
-## 🚀 Installation rapide
+## Installation utilisant Make
+    *(requiert un environnement Linux)*
 
-Ce projet est conçu pour être **facilement exportable et partageable**. Toute la configuration se fait via le fichier `.env.docker`.
+    Pré-requis: 
+        - installateur make
+        - docker
 
-### Étapes d'installation :
+   **Configuration du projet**
+    Commande pour accéder à l'ensemble des commandes make disponible pour ce projet
+```bash
+    make help
+```
 
-1. **Cloner le projet**
-   ```bash
-   git clone <votre-repo>
-   cd greenGoodiesTest
-   ```
+    Éditez le fichier `.env.docker` avec les paramètres souhaités :
+```bash
+    DB_USER=votre_utilisateur
+    DB_PASSWORD=votre_mot_de_passe
+    DB_NAME=votre_base_de_donnees
+    # Ainsi que les ports souhaités pour accéder à votre site
+```
 
-2. **Configurer les variables d'environnement**
-   
-   Éditez le fichier `.env.docker` avec vos paramètres :
-   ```bash
-   DB_USER=votre_utilisateur
-   DB_PASSWORD=votre_mot_de_passe
-   DB_NAME=votre_base_de_donnees
-   # ... autres variables
-   ```
-
-3. **Lancer l'installation**
-   ```bash
+   **Lancer l'installation**
+```bash
    make install
-   ```
-   
+```
    Cette commande va automatiquement :
    - ✅ Générer le fichier `.env.local` avec les bonnes variables
    - ✅ Construire et démarrer les conteneurs Docker
@@ -34,59 +32,41 @@ Ce projet est conçu pour être **facilement exportable et partageable**. Toute 
    - ✅ Créer la base de données et exécuter les migrations
    - ✅ Compiler les fichiers SCSS
 
-4. **Accéder au projet**
-   - Application : `http://localhost:8181` (ou le port défini dans `HOST_NGINX_PORT`)
-   - PhpMyAdmin : `http://localhost:8182`
-   - MailHog : `http://localhost:8025`
-
-5. **Connexion administrateur**
-   - Email : `admin@greengoodiestest.com`
-   - Mot de passe : `admin123`
-
-## 📋 Commandes disponibles
-
+   **Générer les fixtures**
 ```bash
-make install    # Installation complète du projet
-make up         # Démarrer les conteneurs
-make down       # Arrêter les conteneurs
-make env        # Regénérer .env.local à partir de .env.docker
-make watch      # Compiler le SCSS en temps réel
-make cache      # Vider le cache Symfony
-make fixtures   # Charger les fixtures (dev uniquement)
-make restart    # Redémarrer les conteneurs
-make prune      # Supprimer conteneurs et volumes
+   make fixtures
 ```
+    ⚠️ Cette commande est protégée pour ne pas fonctionner en environnement de production
 
-## 🔧 Configuration automatique
+   **Accéder au projet**
+   - Application : `http://localhost:8181` (ou le port configuré dans votre .env.docker)
+   - PhpMyAdmin : `http://localhost:8182` 
+   - Créer votre compte `http://localhost/register`
 
-Le fichier `.env.local` est **généré automatiquement** par le Makefile à partir de `.env.docker`. 
+## Installation Manuelle
 
-**Exemple :** Si vous définissez dans `.env.docker` :
-```bash
-DB_USER=toto
-DB_PASSWORD=secret123
-DB_NAME=ma_base
-```
+    Pré-requis: 
+        - WAMP ou un serveur web : (Apache ou Nginx)
+        - composer
+        - php
+        - mysql
+        - sass (pour compiler le scss)
 
-Le Makefile va automatiquement créer `.env.local` avec :
-```bash
-DATABASE_URL="mysql://toto:secret123@database:3306/ma_base?serverVersion=8.0.32&charset=utf8mb4"
-```
+    1. Éditez le fichier .env pour décommenter la ligne de la base de donnée.
+    2. Remplacez les valeurs username, password, urldatabase, nomdelabase par les valeurs de votre environnement
+    3. Installez les dépendances : 
+        - composer install
+    4. Générez la base de donnée :
+        - php bin/console doctrine:database:create --if-not-exists
+        - php bin/console doctrine:migrations:migrate (Pour mettre à jour le schéma depuis les migrations du projet)
+    5. Générez les fixtures : 
+        - php bin/console doctrine:fixtures:load
+    6. Accédez au site sur l'url configurée sur votre serveur
+    7. Créer votre compte utilisateur sur l'URI /register
 
-Pour regénérer `.env.local` après modification de `.env.docker` :
-```bash
-make env
-```
 
-## 📦 Portabilité
 
-Pour partager le projet avec quelqu'un d'autre :
 
-1. **Commitez** `.env.docker` avec des valeurs par défaut
-2. **Ne committez jamais** `.env.local` (déjà dans .gitignore)
-3. La personne qui récupère le projet n'a qu'à :
-   - Modifier `.env.docker` selon ses besoins
-   - Lancer `make install`
 
-Tout sera configuré automatiquement ! 🎉
+
 
