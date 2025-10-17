@@ -39,6 +39,10 @@ Ce projet est conçu pour être **facilement exportable et partageable**. Toute 
    - PhpMyAdmin : `http://localhost:8182`
    - MailHog : `http://localhost:8025`
 
+5. **Connexion administrateur**
+   - Email : `admin@greengoodiestest.com`
+   - Mot de passe : `admin123`
+
 ## 📋 Commandes disponibles
 
 ```bash

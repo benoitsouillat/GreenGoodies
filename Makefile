@@ -3,8 +3,9 @@
 # Variable pour raccourcir les commandes
 DC = docker-compose --env-file .env.docker
 
-# Charger les variables depuis .env.docker
+# Charger les variables depuis .env.docker et .env
 include .env.docker
+include .env
 export
 
 # 1. Définit l'aide pour l'utilisation du Makefile
@@ -30,15 +31,17 @@ help:
 # 4. Compile le SCSS une première fois
 .PHONY: install
 install: env up
+	@echo "⏳ Attente du démarrage de MySQL..."
+	@sleep 8
 	@echo "Installation des dépendances Composer..."
 	$(DC) exec php composer install
-	sleep 4
 	$(DC) exec php bin/console doctrine:database:create --if-not-exists
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
 	$(MAKE) fix-owner
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
+	@echo "💡 Lancez 'make fixtures' pour créer les fixtures par défaut embarquées dans ce projet"
 
 # Démarre les conteneurs
 .PHONY: up
@@ -75,8 +78,18 @@ watch:
 # Création des fixtures (Uniquement en dev)
 .PHONY: fixtures
 fixtures:
+	@if [ "$(APP_ENV)" != "dev" ]; then \
+		echo "⚠️ Pour protéger la base de données les fixtures ne doivent être chargées qu'en environnement de développement (APP_ENV=dev). ⚠️"; \
+		exit 1; \
+	fi
 	@echo "Chargement des fixtures de développement..."
 	$(DC) exec php bin/console doctrine:fixtures:load --no-interaction
+	@echo "✅ Fixtures chargées avec succès !"
+	@echo ""
+	@echo "🔐 \033[1;36mCompte administrateur créé :\033[0m"
+	@echo "   📧 Email        : \033[1;33madmin@johndoe.com\033[0m"
+	@echo "   🔑 Mot de passe : \033[1;33madmin\033[0m"
+	@echo ""
 
 # Corrige les permissions des dossiers var/ et public/
 .PHONY: fix-perms
