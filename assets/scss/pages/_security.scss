@@ -38,6 +38,14 @@
                     border-color: $grey;
                 }
             }
+            .cgu-checkbox {
+                display: flex;
+                margin-bottom: 30px;
+                label {
+                    order: 2;
+                    margin-left: 10px;
+                }
+            }
         }
         .security-link {
             text-align: center;

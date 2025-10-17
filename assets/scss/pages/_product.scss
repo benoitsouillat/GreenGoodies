@@ -12,7 +12,7 @@
     min-height: 800px;
     height: 100%;
     .product-image {
-        width: 50%;
+        /*width: 50%;*/
         display: flex;
         overflow: hidden;
         img {
@@ -66,14 +66,15 @@
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33%);
 }
 .product-card {
     display: flex;
     flex-direction: column;
     .image-container {
         width: 100%;
-        height: 470px;
+        height: 440px;
+        overflow: hidden;
         img {
             object-fit: cover;
             min-width: 100%;

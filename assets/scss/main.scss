@@ -9,13 +9,16 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: $bgColor;
     margin: 0;
 
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    &:has(.profile-page) {
+    main {
+        width: 100%;
+        background-color: $bgColor;
+    }
+    .profile-page {
         background-color: $cartBgColor;
     }
 }
@@ -48,7 +51,7 @@ h2 {
 }
 
 .alert {
-    margin: 20px 15%;
+    margin: 20px 2%;
 
 }
 

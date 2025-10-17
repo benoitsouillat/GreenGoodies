@@ -6,24 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="ad213a7d-95e3-4083-9d98-c2309d0c0199" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/css/main.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/includes/_header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/includes/_header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/includes/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/includes/_variables.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scss/main.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/main.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scss/pages/_accueil.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/pages/_accueil.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scss/pages/_product.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/pages/_product.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/scss/pages/_profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/pages/_profile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Services/OrderService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Services/OrderService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/pages/_security.scss" beforeDir="false" afterPath="$PROJECT_DIR$/assets/scss/pages/_security.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Factory/ProductFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Factory/ProductFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RegistrationFormType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/cartCard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/cartCard.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/details.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/details.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/homeCard.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/homeCard.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/cart.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/cart.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/order.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/order.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/profile.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/profile.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,25 +205,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;//wsl.localhost/Ubuntu/home/venture/greengoodies/templates/user&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "master",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "//wsl.localhost/Ubuntu/home/venture/greengoodies/templates/user",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.editor",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="\\wsl.localhost\Ubuntu\home\venture\greengoodies\templates\user" />
@@ -275,7 +270,10 @@
       <workItem from="1759475652638" duration="16811000" />
       <workItem from="1760080624148" duration="77000" />
       <workItem from="1760087115968" duration="9772000" />
-      <workItem from="1760097171009" duration="9426000" />
+      <workItem from="1760097171009" duration="11403000" />
+      <workItem from="1760353701932" duration="2383000" />
+      <workItem from="1760376576406" duration="1267000" />
+      <workItem from="1760684184852" duration="770000" />
     </task>
     <servers />
   </component>

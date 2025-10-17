@@ -90,7 +90,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-basis: 50%;
+  flex-basis: 60%;
   font-weight: 300;
   font-size: 14px;
 }
@@ -144,6 +144,14 @@ footer {
   height: 58px;
   border-color: #666666;
 }
+.security-body .form-container form .cgu-checkbox {
+  display: flex;
+  margin-bottom: 30px;
+}
+.security-body .form-container form .cgu-checkbox label {
+  order: 2;
+  margin-left: 10px;
+}
 .security-body .form-container .security-link {
   text-align: center;
 }
@@ -165,7 +173,7 @@ footer {
   height: 100%;
 }
 .product-details-page .product-image {
-  width: 50%;
+  /*width: 50%;*/
   display: flex;
   overflow: hidden;
 }
@@ -217,7 +225,7 @@ footer {
 
 .product-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 33%);
 }
 
 .product-card {
@@ -226,7 +234,8 @@ footer {
 }
 .product-card .image-container {
   width: 100%;
-  height: 470px;
+  height: 440px;
+  overflow: hidden;
 }
 .product-card .image-container img {
   object-fit: cover;
@@ -269,7 +278,7 @@ footer {
   margin: 0 auto;
   padding: 25px 0 70px 0;
   width: 100%;
-  max-width: 600px;
+  /*max-width: 600px;*/
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -279,7 +288,9 @@ footer {
   font-size: 20px;
   font-weight: 500;
 }
-.profile-page > section {
+.profile-page > section, .profile-page > p {
+  margin: auto;
+  width: 600px;
   padding: 60px;
   background-color: #FFFDF7;
 }
@@ -313,6 +324,12 @@ footer {
 }
 .profile-page table tbody tr td {
   width: 33%;
+}
+.profile-page.cart > * {
+  margin: auto;
+}
+.profile-page.cart .breadcrumb-link {
+  width: 600px;
 }
 .profile-page.cart .breadcrumb-link::before {
   content: "x ";
@@ -362,6 +379,7 @@ footer {
   color: #000000;
 }
 .profile-page.cart .total-cart {
+  width: 600px;
   padding: 24px 40px;
   background-color: #FFFDF7;
   text-align: right;
@@ -383,19 +401,23 @@ footer {
   font-size: 12px;
 }
 .profile-page.cart .btn-fullwidth {
-  margin: auto 10%;
+  margin: auto;
   width: 80%;
+  max-width: 590px;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: #FFFDF7;
   margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
-body:has(.profile-page) {
+body main {
+  width: 100%;
+  background-color: #FFFDF7;
+}
+body .profile-page {
   background-color: #F7F1EC;
 }
 
@@ -427,7 +449,7 @@ h2 {
 }
 
 .alert {
-  margin: 20px 15%;
+  margin: 20px 2%;
 }
 
 footer {

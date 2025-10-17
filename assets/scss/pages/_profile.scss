@@ -2,7 +2,7 @@
     margin: 0 auto;
     padding: 25px 0 70px 0;
     width: 100%;
-    max-width: 600px;
+    /*max-width: 600px;*/
 
     display: flex;
     flex-direction: column;
@@ -13,7 +13,9 @@
         font-size: 20px;
         font-weight: 500;
     }
-    > section {
+    > section, > p {
+        margin: auto;
+        width: 600px;
         padding: 60px;
         background-color: $white;
     }
@@ -53,7 +55,11 @@
         }
     }
     &.cart {
+        > * {
+            margin: auto;
+        }
         .breadcrumb-link {
+            width: 600px;
             &::before {
                 content: "x ";
                 font-size: 12px;
@@ -102,6 +108,7 @@
             }
         }
         .total-cart {
+            width: 600px;
             padding: 24px 40px;
             background-color: $white;
             text-align: right;
@@ -123,8 +130,9 @@
             }
         }
         .btn-fullwidth {
-            margin: auto 10%;
+            margin: auto;
             width: 80%;
+            max-width: 590px;
         }
     }
 }

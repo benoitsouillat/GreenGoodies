@@ -13,14 +13,16 @@ help:
 	@echo "  make up           : Démarre les conteneurs"
 	@echo "  make down         : Arrête les conteneurs"
 	@echo "  make watch        : Compile le SCSS en direct (à lancer dans une console séparée)"
-	@echo "  make fix-perms    : Corrige les permissions des dossiers var/ et public/"
+	@echo "  make fix-owner    : Corrige les permissions des fichiers pour pouvoir les exécuter côté WSL"
 	@echo "  make cache        : Vide le cache de Symfony"
 	@echo "  make prune        : Arrête et supprime les conteneurs et les données (volumes)"
 	@echo "  make restart      : Redémarre les conteneurs"
 	@echo ""
 
 # 1. Construit et lance les conteneurs
-# 2. Installe les outils (npm, sass) et les dépendances (composer)
+# 2. Installation des dépendances du composer.json
+# 3. Création de la base de données et lancement des migrations pour créer le schéma
+# 4. Compile le SCSS une première fois
 .PHONY: install
 install: up
 	@echo "Installation des dépendances Composer..."
@@ -30,7 +32,6 @@ install: up
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
 	$(MAKE) fix-owner
-	# $(MAKE) chown
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
 
@@ -52,6 +53,12 @@ down:
 watch:
 	@echo "👀 Lancement du watch SCSS... (CTRL+C pour arrêter)"
 	$(DC) exec php sass --watch assets/scss/main.scss:assets/css/main.css
+
+# Création des fixtures (Uniquement en dev)
+.PHONY: fixtures
+fixtures:
+	@echo "Chargement des fixtures de développement..."
+	$(DC) exec php bin/console doctrine:fixtures:load --no-interaction
 
 # Corrige les permissions des dossiers var/ et public/
 .PHONY: fix-perms
@@ -77,11 +84,6 @@ prune:
 	@echo "ATTENTION : Suppression des conteneurs et de toutes les données..."
 	$(DC) down -v
 
-.PHONY: chown
-chown:
-	@echo "Correction du propriétaire côté WSL..."
-	sudo chown -R $$(id -u):$$(id -g) var public
-
 # Redémarre les conteneurs
 .PHONY: restart
-restart: down up
+restart: down up cache

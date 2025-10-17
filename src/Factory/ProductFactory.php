@@ -38,7 +38,7 @@ final class ProductFactory extends PersistentProxyObjectFactory
             'shortDescription' => self::faker()->text(),
             'longDescription' => self::faker()->text(),
             'price' => self::faker()->randomFloat(2, 1, 1000),
-            'picture' => 'https://picsum.photos/seed/' . self::faker()->unique()->numberBetween(1, 1000) . '/400/300',
+            'picture' => 'https://picsum.photos/seed/' . self::faker()->unique()->numberBetween(1, 1000) . '/800/800',
         ];
     }
 

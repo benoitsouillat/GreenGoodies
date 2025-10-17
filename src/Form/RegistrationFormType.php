@@ -73,6 +73,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'required' => true,
                 'label' => 'J\'accepte les CGU de GreenGoodies',
+                'row_attr' => ['class' => 'cgu-checkbox'],
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter les conditions générales d\'utilisation.',
