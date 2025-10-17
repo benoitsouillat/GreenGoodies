@@ -16,7 +16,6 @@ final class OrderController extends AbstractController
     public function cart(OrderService $orderService): Response
     {
         $currentOrder = $orderService->getCurrentOrder();
-        $form = $this->createForm(OrderLineType::class);
 
         return $this->render('user/cart.html.twig', [
             'user' => $this->getUser(),
