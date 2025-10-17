@@ -87,6 +87,7 @@ fix-perms:
 
 .PHONY: fix-owner
 fix-owner:
+	@echo "⚠️ Vous devez entrer votre mot de passe sudo pour corriger les permissions des fichiers. ⚠️"
 	@echo "Correction du propriétaire côté WSL..."
 	sudo chown -R $$(id -u):$$(id -g) .
 
