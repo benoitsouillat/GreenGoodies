@@ -18,7 +18,9 @@ help:
 	@echo "  make up           : Démarre les conteneurs"
 	@echo "  make down         : Arrête les conteneurs"
 	@echo "  make env          : Regénère le fichier .env.local à partir de .env.docker"
+	@echo "  make jwt          : Génère les clés JWT (nécessaire pour l'API)"
 	@echo "  make watch        : Compile le SCSS en direct (à lancer dans une console séparée)"
+	@echo "  make fixtures     : Charge les fixtures de développement (données de test)"
 	@echo "  make fix-owner    : Corrige les permissions des fichiers pour pouvoir les exécuter côté WSL"
 	@echo "  make cache        : Vide le cache de Symfony"
 	@echo "  make prune        : Arrête et supprime les conteneurs et les données (volumes)"
@@ -38,6 +40,7 @@ install: env up
 	$(DC) exec php bin/console doctrine:database:create --if-not-exists
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
+	$(MAKE) jwt
 	$(MAKE) fix-owner
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
@@ -90,6 +93,18 @@ fixtures:
 	@echo "   📧 Email        : \033[1;33madmin@johndoe.com\033[0m"
 	@echo "   🔑 Mot de passe : \033[1;33madmin\033[0m"
 	@echo ""
+
+# Génération des clés JWT
+.PHONY: jwt
+jwt:
+	@echo "Génération des clés JWT pour l'API..."
+	@bash -c 'read -s -p " 🗝️ Entrez une passphrase pour la clé privée (laisser vide pour aucune) : " PASS; \
+	echo; \
+	touch .env.local; \
+	sed -i "/^JWT_PASSPHRASE=/d" .env.local 2>/dev/null || true; \
+	printf "JWT_PASSPHRASE=\"%s\"\n" "$$PASS" >> .env.local'
+	@$(DC) exec php bin/console lexik:jwt:generate-keypair --no-interaction --overwrite
+	@echo "✅ Clés JWT générées avec succès !"
 
 # Corrige les permissions des dossiers var/ et public/
 .PHONY: fix-perms

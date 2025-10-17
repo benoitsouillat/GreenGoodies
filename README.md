@@ -31,6 +31,7 @@
    - ✅ Installer les dépendances Composer
    - ✅ Créer la base de données et exécuter les migrations
    - ✅ Compiler les fichiers SCSS
+   - ✅ Générer les clés JWT pour l'API
 
    **Générer les fixtures**
 ```bash
@@ -47,9 +48,9 @@
 
     Pré-requis: 
         - WAMP ou un serveur web : (Apache ou Nginx)
-        - composer
-        - php
-        - mysql
+        - composer 2.x
+        - PHP 8.3
+        - mysql 8.2
         - sass (pour compiler le scss)
 
     1. Éditez le fichier .env pour décommenter la ligne de la base de donnée.
@@ -63,6 +64,12 @@
         - php bin/console doctrine:fixtures:load
     6. Accédez au site sur l'url configurée sur votre serveur
     7. Créer votre compte utilisateur sur l'URI /register
+    8. API
+        - Générer les clés JWT : php bin/console lexik:jwt:generate-keypair
+        - Utiliser l'API :
+            - Sur le site, dans /profile vérifié que l'accès API est bien activé
+            - Récupérez votre token sur /api/login en envoyant (POST) votre username et votre mot de passe
+            - Accédez aux données en récupérant (GET) sur /api/products
 
 
 
