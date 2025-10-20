@@ -2,7 +2,7 @@
     {#<img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}">#}
     <a href="{{ path('app_product_details', {id : product.id }) }}">
         <div class="image-container">
-            <img src="{{ product.picture }}" alt="{{ product.name }}">
+            <img src="{{ product.picture | imagine_filter('product_list') }}" alt="{{ product.name }}">
         </div>
     </a>
     <a href="{{ path('app_product_details', {id : product.id }) }}">

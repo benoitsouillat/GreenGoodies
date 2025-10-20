@@ -9,7 +9,7 @@
 {#
              <img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
 #}
-             <img src="{{ product.picture }}" alt="{{ product.name }}">
+             <img src="{{ product.picture | imagine_filter('product_detail')}}" alt="{{ product.name }}">
          </div>
         <div class="product-info">
             <h1>{{ product.name }}</h1>
