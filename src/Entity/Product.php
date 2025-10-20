@@ -23,14 +23,22 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Assert\NotBlank(message: 'Veuillez indiquer un prix pour le produit')]
+    #[Assert\PositiveOrZero(message: 'le prix ne peut pas être négatif')]
     #[Groups(['getProducts'])]
     #[ORM\Column]
     private ?float $price = null;
 
+    #[Assert\Length(
+        min: 20,
+        max: 240,
+        minMessage: 'La description courte doit faire au moins {{ limit }} caractères',
+        maxMessage: 'La description courte ne peut pas dépasser {{ limit }} caractères')]
     #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $shortDescription = null;
 
+    #[Assert\NotBlank(message: 'Veuillez indiquer une description')]
     #[Groups(['getProducts'])]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $longDescription = null;
