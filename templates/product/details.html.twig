@@ -6,10 +6,11 @@
 
     <article class="product-details-page">
          <div class="product-image">
-{#
-             <img src="{{ asset('images/products/' ~ product.image) }}" alt="{{ product.name }}">
-#}
-             <img src="{{ product.picture | imagine_filter('product_detail')}}" alt="{{ product.name }}">
+             {% if product.picture starts with 'http' %}
+                 <img src="{{ product.picture }}" alt="{{ product.name }}">
+             {% else %}
+                 <img src="{{ asset('images/products/' ~ product.picture) | imagine_filter('product_detail') }}" alt="{{ product.name }}">
+             {% endif %}
          </div>
         <div class="product-info">
             <h1>{{ product.name }}</h1>

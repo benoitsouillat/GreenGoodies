@@ -1,8 +1,11 @@
 <div class="product-card">
-    {#<img src="{{ asset('images/' ~ product.image) }}" alt="{{ product.name }}">#}
     <a href="{{ path('app_product_details', {id : product.id }) }}">
         <div class="image-container">
-            <img src="{{ product.picture | imagine_filter('product_list') }}" alt="{{ product.name }}">
+            {% if product.picture starts with 'http' %}
+                <img src="{{ product.picture }}" alt="{{ product.name }}">
+            {% else %}
+                <img src="{{  asset('images/' ~ product.picture) | imagine_filter('product_list') }}" alt="{{ product.name }}">
+            {% endif %}
         </div>
     </a>
     <a href="{{ path('app_product_details', {id : product.id }) }}">
