@@ -6,7 +6,6 @@ liip_imagine:
         default:
             web_path: ~
 
-
     loaders:
         products_loader:
             filesystem:

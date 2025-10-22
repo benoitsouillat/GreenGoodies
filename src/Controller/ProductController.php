@@ -14,17 +14,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\Cache\TagAwareCacheInterface;
 
 final class ProductController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $manager,
+        private readonly TagAwareCacheInterface $cache
+
     ) {}
 
     #[Route('/products', name: 'app_products', methods: ['GET'])]
     public function list(): Response
     {
-        $products = $this->manager->getRepository(Product::class)->findAll();
+        // Mise en cache de la page tous les produits pour une durée d'une heure
+        $idCache = "getAllProducts";
+        $products = $this->cache->get($idCache, function (ItemInterface $item) use ($idCache) {
+            $item->expiresAfter(3600);
+            $item->tag('productsCache');
+            return $this->manager->getRepository(Product::class)->findAll();
+        });
         return $this->render('product/list.html.twig', [
             'products' => $products,
         ]);
@@ -34,7 +44,12 @@ final class ProductController extends AbstractController
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
     public function api_list(SerializerInterface $serializer,): JsonResponse
     {
-        $products = $this->manager->getRepository(Product::class)->findAll();
+        $idCache = "getAllProducts";
+        $products = $this->cache->get($idCache, function (ItemInterface $item) use ($idCache) {
+            $item->expiresAfter(3600);
+            $item->tag('productsCache');
+            return $this->manager->getRepository(Product::class)->findAll();
+        });
         $json = $serializer->serialize($products, 'json', ['groups' => 'getProducts']);
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
@@ -44,15 +59,27 @@ final class ProductController extends AbstractController
     {
         $quantityInCart = $orderService->getOrderLineQuantity($product) ?? 0;
         $form = $this->createForm(OrderLineType::class, $orderService->getOrderLine($product), []);
+
+        // S'il l'article n'est pas dans le panier, on retire le champ quantity du formulaire pour mettre le bouton "Ajouter au panier"
         if ($quantityInCart <= 0) {
             $form->remove('quantity');
         }
+        // On récupère la valeur posté pour enregistrer la bonne quantité dans le panier
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $retour = $productService->manageQuantity($product, $form->getData()->getQuantity());
             $this->addFlash('success', $retour['message']);
-            return  $this->redirectToRoute($retour['route'], $retour['params']);
+            return $this->redirectToRoute($retour['route'], $retour['params']);
         }
+
+        // On créé un cache pour ce produit pour une durée d'une heure
+        $idCache = "getProduct-" . $product->getId();
+        $product = $this->cache->get($idCache, function (ItemInterface $item) use ($product) {
+            $item->expiresAfter(3600);
+            $item->tag('productCache' . $product->getId());
+            return $this->manager->getRepository(Product::class)->find($product);
+        });
+
         return $this->render('product/details.html.twig', [
             'form' => $form->createView(),
             'product' => $product,
