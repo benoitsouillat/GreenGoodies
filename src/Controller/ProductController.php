@@ -36,6 +36,7 @@ final class ProductController extends AbstractController
             $item->tag('productsCache');
             return $this->manager->getRepository(Product::class)->findAll();
         });
+
         return $this->render('product/list.html.twig', [
             'products' => $products,
         ]);
@@ -70,26 +71,30 @@ final class ProductController extends AbstractController
     #[Route('/product/{id}', name: 'app_product_details', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function details(Request $request, Product $product, OrderService $orderService, ProductService $productService): Response
     {
+        // On récupère la quantité de ce produit dans le panier
         $quantityInCart = $orderService->getOrderLineQuantity($product) ?? 0;
         $form = $this->createForm(OrderLineType::class, $orderService->getOrderLine($product), []);
 
-        // S'il l'article n'est pas dans le panier, on retire le champ quantity du formulaire pour mettre le bouton "Ajouter au panier"
+        // Si l'article n'est pas dans le panier, on retire le champ quantity du formulaire pour mettre le bouton "Ajouter au panier"
         if ($quantityInCart <= 0) {
             $form->remove('quantity');
         }
-        // On récupère la valeur posté pour enregistrer la bonne quantité dans le panier
+        // On récupère la valeur postée pour enregistrer la bonne quantité dans le panier
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // On met à jour la quantité de ce produit dans le panier via le service ProductService
             $retour = $productService->manageQuantity($product, $form->getData()->getQuantity());
             $this->addFlash('success', $retour['message']);
+
             return $this->redirectToRoute($retour['route'], $retour['params']);
         }
 
-        // On créé un cache pour ce produit pour une durée d'une heure
+        // On crée un cache pour ce produit pour une durée d'une heure
         $idCache = "getProduct-" . $product->getId();
         $product = $this->cache->get($idCache, function (ItemInterface $item) use ($product) {
             $item->expiresAfter(3600);
             $item->tag('productCache' . $product->getId());
+
             return $this->manager->getRepository(Product::class)->find($product);
         });
 
@@ -99,5 +104,4 @@ final class ProductController extends AbstractController
             'quantityInCart' => $quantityInCart
         ]);
     }
-
 }

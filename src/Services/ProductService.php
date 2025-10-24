@@ -61,6 +61,7 @@ class ProductService
         }
         $request = $this->requestStack->getCurrentRequest();
         $baseUrl = $request->getSchemeAndHttpHost();
+
         return $baseUrl . '/images/products/' . $imagePath;
     }
 
@@ -74,6 +75,7 @@ class ProductService
         foreach ($products as $product) {
             $product->setPicture($this->setApiPictureURL($product));
         }
+
         return $products;
     }
 }
