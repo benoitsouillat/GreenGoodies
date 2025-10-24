@@ -10,11 +10,11 @@ use App\Enum\OrderStatus;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class OrderService
+readonly class OrderService
 {
     public function __construct(
-        public readonly EntityManagerInterface $manager,
-        public readonly Security $security,
+        public EntityManagerInterface $manager,
+        public Security $security,
     ) {}
 
     private function getUser(): ?User

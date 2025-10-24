@@ -5,11 +5,11 @@ namespace App\Services;
 use App\Entity\Product;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ProductService
+readonly class ProductService
 {
     public function __construct(
-        private readonly OrderService $orderService,
-        private readonly RequestStack $requestStack
+        private OrderService $orderService,
+        private RequestStack $requestStack
     )
     {}
 

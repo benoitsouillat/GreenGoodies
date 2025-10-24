@@ -41,7 +41,13 @@ install: env up
 	$(DC) exec php bin/console doctrine:migrations:migrate --no-interaction
 	$(DC) exec php sass assets/scss/main.scss assets/css/main.css
 	$(MAKE) jwt
-	$(MAKE) fix-owner
+	@echo "Pour modifier des fichiers générés par la symfony-cli, il faudra taper votre mot de passe Linux. "
+	@bash -c 'read -p "❓ Voulez-vous corriger les permissions des fichiers ? (o/N) : " RESPONSE; \
+	if [ "$$RESPONSE" = "o" ] || [ "$$RESPONSE" = "O" ]; then \
+		$(MAKE) fix-owner; \
+	else \
+		echo "⏭️ Correction des permissions annulée."; \
+	fi'
 	@echo "✅ Projet prêt ! Utilisez 'make up' pour démarrer et 'make down' pour arrêter."
 	@echo "💡 Lancez 'make watch' dans un autre terminal pour compiler le SCSS en direct."
 	@echo "💡 Lancez 'make fixtures' pour créer les fixtures par défaut embarquées dans ce projet"
