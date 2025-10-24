@@ -45,14 +45,25 @@ final class ProductController extends AbstractController
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
     public function api_list(SerializerInterface $serializer): JsonResponse
     {
+        // Mise en cache de la page tous les produits pour une durée d'une heure
         $idCache = "getAllProducts";
         $products = $this->cache->get($idCache, function (ItemInterface $item) use ($idCache) {
             $item->expiresAfter(3600);
             $item->tag('productsCache');
             return $this->manager->getRepository(Product::class)->findAll();
         });
+
+        // Si aucun produit n'est trouvé, on retourne un code 204
+        if (empty($products)) {
+            return new JsonResponse("", Response::HTTP_NO_CONTENT);
+        }
+
+        // Préparation des produits pour l'API (mise à jour des URL des images)
         $products = $this->productService->prepareProductForApi($products);
+
+        // Sérialisation des produits en JSON
         $json = $serializer->serialize($products, 'json', ['groups' => 'getProducts']);
+
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
 
