@@ -23,6 +23,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
 
 RUN docker-php-ext-install pdo_mysql intl zip xml dom opcache
 
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd -j$(nproc) gd
+
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 RUN echo "upload_max_filesize=8M" > /usr/local/etc/php/conf.d/99-upload.ini \

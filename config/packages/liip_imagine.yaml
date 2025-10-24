@@ -2,17 +2,22 @@
 liip_imagine:
     driver: "gd"
 
+    cache: web_cache
+
     resolvers:
-        default:
-            web_path: ~
+        web_cache:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "media/cache"
 
     loaders:
         products_loader:
             filesystem:
+                # Chemin de configuration de VichUploader
                 data_root: "%kernel.project_dir%/public/images/products"
 
     filter_sets:
-        cache: ~
+        #cache: web_cache
         product_list:
             data_loader: products_loader
             quality: 75
@@ -27,3 +32,4 @@ liip_imagine:
                 thumbnail:
                     size: [600, 800]
                     mode: outbound
+
