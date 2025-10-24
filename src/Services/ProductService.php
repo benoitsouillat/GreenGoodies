@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Entity\Product;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProductService
 {
-    public function __construct(private readonly OrderService $orderService)
-    {
-    }
+    public function __construct(
+        private readonly OrderService $orderService,
+        private readonly RequestStack $requestStack
+    )
+    {}
 
     /**
      * Retourne un tableau avec le message, la route et les paramètres de route en fonction de la quantité du formulaire Quantity
@@ -45,4 +48,32 @@ class ProductService
         return $values;
     }
 
+    /**
+     * Retourne l'URL complète de l'image du produit pour l'API
+     * @param Product $product
+     * @return string
+     */
+    public function setApiPictureURL(Product $product): string
+    {
+        $imagePath = $product->getPicture();
+        if (str_starts_with($imagePath, 'http')) {
+            return $imagePath;
+        }
+        $request = $this->requestStack->getCurrentRequest();
+        $baseUrl = $request->getSchemeAndHttpHost();
+        return $baseUrl . '/images/products/' . $imagePath;
+    }
+
+    /**
+     * Prépare les produits pour l'API en mettant à jour l'URL de l'image
+     * @param array $products
+     * @return array(Product)
+     * */
+    public function prepareProductForApi(array $products): array
+    {
+        foreach ($products as $product) {
+            $product->setPicture($this->setApiPictureURL($product));
+        }
+        return $products;
+    }
 }

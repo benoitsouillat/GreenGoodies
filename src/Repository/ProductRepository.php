@@ -16,10 +16,16 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * Retourne les $limit derniers produits ajoutés
+     * @param $limit
+     * @return mixed
+     */
     public function findAllWithLimit($limit = 10)
     {
         return $this->createQueryBuilder('p')
             ->setMaxResults($limit)
+            ->orderBy('p.id', 'DESC')
             ->getQuery()
             ->getResult();
     }

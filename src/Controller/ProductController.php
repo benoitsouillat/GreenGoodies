@@ -21,7 +21,8 @@ final class ProductController extends AbstractController
 {
     public function __construct(
         private readonly EntityManagerInterface $manager,
-        private readonly TagAwareCacheInterface $cache
+        private readonly TagAwareCacheInterface $cache,
+        private readonly ProductService $productService,
 
     ) {}
 
@@ -42,7 +43,7 @@ final class ProductController extends AbstractController
 
     #[IsGranted('API_ACCESS')]
     #[Route('/api/products', name: 'api_products', methods: ['GET'])]
-    public function api_list(SerializerInterface $serializer,): JsonResponse
+    public function api_list(SerializerInterface $serializer): JsonResponse
     {
         $idCache = "getAllProducts";
         $products = $this->cache->get($idCache, function (ItemInterface $item) use ($idCache) {
@@ -50,6 +51,7 @@ final class ProductController extends AbstractController
             $item->tag('productsCache');
             return $this->manager->getRepository(Product::class)->findAll();
         });
+        $products = $this->productService->prepareProductForApi($products);
         $json = $serializer->serialize($products, 'json', ['groups' => 'getProducts']);
         return new JsonResponse($json, Response::HTTP_OK, [], true);
     }
