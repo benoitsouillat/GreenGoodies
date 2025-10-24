@@ -99,6 +99,7 @@ fixtures:
 	@echo "   📧 Email        : \033[1;33madmin@johndoe.com\033[0m"
 	@echo "   🔑 Mot de passe : \033[1;33madmin\033[0m"
 	@echo ""
+	$(MAKE) cache
 
 # Génération des clés JWT
 .PHONY: jwt
