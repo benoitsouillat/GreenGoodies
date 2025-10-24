@@ -17,7 +17,6 @@ liip_imagine:
                 data_root: "%kernel.project_dir%/public/images/products"
 
     filter_sets:
-        #cache: web_cache
         product_list:
             data_loader: products_loader
             quality: 75
@@ -28,6 +27,20 @@ liip_imagine:
         product_detail:
             data_loader: products_loader
             quality: 85
+            filters:
+                thumbnail:
+                    size: [600, 800]
+                    mode: outbound
+        square_cart:
+            data_loader: products_loader
+            quality: 75
+            filters:
+                thumbnail:
+                    size: [160, 160]
+                    mode: outbound
+        external_image:
+            data_loader: stream #Ne fonctionne pas sur les liens qui produisent une redirection
+            quality: 75
             filters:
                 thumbnail:
                     size: [600, 800]

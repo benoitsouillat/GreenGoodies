@@ -1,5 +1,9 @@
 <div class="product-basket-card">
-    <div class="img-container"> <img src="{{ orderline.product.picture }}" alt="{{ orderline.product.name }}"></div>
+    {% if orderline.product.picture starts with 'http' %}
+        <div class="img-container"> <img src="{{ orderline.product.picture }}" alt="{{ orderline.product.name }}"></div>
+    {% else %}
+        <div class="img-container"> <img src="{{ orderline.product.picture | imagine_filter('square_cart') }}" alt="{{ orderline.product.name }}"></div>
+    {% endif %}
     <div class="product-details">
         <h3>{{ orderline.product.name }}</h3>
         <p class="quantity">Quantité : {{ orderline.quantity }}</p>
