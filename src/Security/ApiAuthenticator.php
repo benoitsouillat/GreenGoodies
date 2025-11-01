@@ -24,19 +24,11 @@ class ApiAuthenticator extends JWTAuthenticator
         ?Security $security = null,
     ) {
         parent::__construct($jwtManager, $eventDispatcher, $tokenExtractor, $userProvider, $translator);
-        $this->security = $security;
     }
 
     public function authenticate(Request $request): Passport
     {
-
-        $passport = parent::authenticate($request);
-        $user = $passport->getUser();
-        if ($this->security->isGranted('API_ACCESS', $user) === false) {
-            throw new ApiException('Votre accès à l\'API n\'est pas activé', 403);
-        }
-
-        return $passport;
+        return parent::authenticate($request);
     }
 
 }
